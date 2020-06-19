@@ -1,0 +1,48 @@
+﻿@model IEnumerable<CustomIdentityApp.Models.User>
+@{
+    ViewBag.Title = "Список пользователей";
+}
+
+<a asp-controller="Users" asp-action="UnBlock">Разблокировать</a>
+<a asp-controller="Users" asp-action="Block">Заблокировать</a>
+<a asp-controller="Users" asp-action="Delete">Удалить</a>
+<a asp-controller="Users" asp-action="SelectAll">Выбрать всех</a>
+<a asp-controller="Users" asp-action="RemoveAll">Снять выделение</a>
+
+
+
+
+
+
+    <table class="table">
+        <tr><th>CheckBoxes</th><th>IsSelected?</th><th>Email</th><th>LastLoginDate</th><th>LastRegistrationDate</th><th>Name</th><th>Status</th><th>Id</th></tr>
+
+        @foreach (var user in Model)
+        {
+    <tr>
+        <td>
+            <form asp-action="Select" asp-route-id="@user.Id" method="post">
+                <button type="submit" class="btn btn-sm btn-danger">
+                    Выделить
+                </button>
+            </form>
+            <form asp-action="Remove" asp-route-id="@user.Id" method="post">
+                <button type="submit" class="btn btn-sm btn-danger">
+                    Снять выделение
+                </button>
+            </form>
+        </td>
+
+        <td>@user.IsChecked</td>
+        <td>@user.Email</td>
+        <td>@user.LastLoginDate</td>
+        <td>@user.LastRegistrationDate</td>
+        <td>@user.Name</td>
+        <td>@user.Status</td>
+        <td>@user.Id</td>
+    </tr>
+        }
+    </table>
+
+
+
